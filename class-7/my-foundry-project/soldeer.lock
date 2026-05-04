@@ -1,0 +1,20 @@
+[[dependencies]]
+name = "@openzeppelin-contracts"
+version = "5.6.0"
+url = "https://soldeer-revisions.s3.amazonaws.com/@openzeppelin-contracts/5_6_0_27-02-2026_07:51:53_contracts.zip"
+checksum = "abed7c3e54d86ad85fb4b349498b80d282ad52c085ec6ae970bd3f5fc54ed4f2"
+integrity = "64d33d721fa88f564c134f9049cccbd4996aec6a109e4b33a415cc0fece75d83"
+
+[[dependencies]]
+name = "@uniswap-universal-router"
+version = "1.6.0"
+url = "https://soldeer-revisions.s3.amazonaws.com/@uniswap-universal-router/1_6_0_22-01-2024_13:15:39_universal-router.zip"
+checksum = "94f563c6e7629a3a46c6a69baff7190339eba49acd6c230f32a84969dae1aaff"
+integrity = "487bd32d40a5c54aee0ea191ace6027a03fed1449d6aa4548b96a5ea94b89ebb"
+
+[[dependencies]]
+name = "forge-std"
+version = "1.16.0"
+url = "https://soldeer-revisions.s3.amazonaws.com/forge-std/1_16_0_27-04-2026_06:23:43_forge-std-1.16.zip"
+checksum = "3ebe6ca2011b1a11b0f3d4c2a53f58e4d149dc0c58a4052a39405391cd2ae8ce"
+integrity = "c433748f09889d3e2b3090303f4bc03700b363bd952e22b1801db00cfac7b809"

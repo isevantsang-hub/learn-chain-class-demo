@@ -1,0 +1,29 @@
+# Compiler files
+cache/
+out/
+
+# Commonly ignored directories
+.logs/
+.ignore/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Docs
+docs/
+
+# Dotenv file
+.env
+.env.*
+!.env.example
+/Users/evan/web3Code/learn-chain-class-demo/class-7/my-foundry-project/.env
+/Users/evan/web3Code/learn-chain-class-demo/class-7/my-foundry-standar-web-foundry-test/.env
+
+
+
+# Soldeer
+/dependencies
+
+

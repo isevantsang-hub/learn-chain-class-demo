@@ -1,0 +1,53 @@
+# ==================== 基础配置 ====================
+[profile.default]
+src = "src"
+test = "test"
+script = "script"
+out = "out"
+solc = "0.8.20"
+optimizer = true
+optimizer_runs = 200
+auto_detect_remappings = true
+libs = ["dependencies"]
+remappings = [
+    "@openzeppelin-contracts-5.6.0/=dependencies/@openzeppelin-contracts-5.6.0/",
+    "@uniswap-universal-router-1.6.0/=dependencies/@uniswap-universal-router-1.6.0/",
+    "forge-std/=dependencies/forge-std-1.16.0/src/",
+]
+
+
+[soldeer]
+install_dir = "dependencies"
+remappings_generate = true       # 让 soldeer 自动生成映射文件
+remappings_location = "config"   # 可写可不写，已经不起作用
+remappings_prefix = ""
+recursive_deps = false
+
+
+
+[dependencies] # <= Dependencies will be added under this config
+"@openzeppelin-contracts" = { version = "5.6.0" }
+forge-std = "1.16.0"
+"@uniswap-universal-router" = { version = "1.6.0" }
+
+
+# ==================== RPC 端点配置 ====================
+# 这里定义所有网络的连接地址（像电话簿）
+[rpc_endpoints]
+local = "http://127.0.0.1:8545"
+sepolia = "${SEPOLIA_RPC_URL}"  # 从 .env 文件读取
+# mainnet = "${MAINNET_RPC_URL}"  # 暂时注释
+
+# ==================== Etherscan 配置 ====================
+# 这里定义 Etherscan API Key（像身份证管理）
+[etherscan]
+sepolia = { key = "${SEPOLIA_ETHERSCAN_API_KEY}" }
+
+
+# mainnet = { key = "${MAINNET_ETHERSCAN_API_KEY}" }  # 暂时注释
+
+# ==================== 分叉配置（用于测试） ====================
+# 如果你想让测试在特定网络状态下运行，可以配置这里
+# 注意：fork_url 应该在这里或命令行中指定，而不是在 [profile] 中
+# [fork]
+# sepolia_url = "${SEPOLIA_RPC_URL}"

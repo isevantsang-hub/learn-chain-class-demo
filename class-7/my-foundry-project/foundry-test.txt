@@ -1,0 +1,42 @@
+# ==================== RPC 端点配置（电话簿） ====================
+[rpc_endpoints]
+# 定义所有网络的连接地址
+local = "http://127.0.0.1:8545"                     # 本地 Anvil 节点
+sepolia = "${SEPOLIA_RPC_URL}"                      # Sepolia 测试网
+# mainnet = "${MAINNET_RPC_URL}"                    # 主网（你暂时没有）
+
+# ==================== Etherscan 配置（身份证管理） ====================
+[etherscan]
+# 为每个网络配置 Etherscan API Key
+sepolia = { key = "${SEPOLIA_ETHERSCAN_API_KEY}" }
+# mainnet = { key = "${MAINNET_ETHERSCAN_API_KEY}" }  # 暂时注释
+
+# ==================== 默认配置 ====================
+[profile.default]
+src = "src"
+test = "test"
+script = "script"
+out = "out"
+libs = ["lib"]
+solc = "0.8.20"
+optimizer = true
+optimizer_runs = 200
+auto_detect_remappings = true
+remappings = [
+    "@openzeppelin/=lib/openzeppelin-contracts/",
+    "@chainlink/=lib/chainlink/",
+    "@solmate/=lib/solmate/src/"
+]
+
+# ==================== 开发环境（本地） ====================
+[profile.dev]
+inherit = "default"          # 注意：是 inherit 不是 inherits
+# fork_url = "${local}"      # 如果需要分叉测试可以取消注释
+sender = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+
+# ==================== Sepolia 测试网 ====================
+[profile.sepolia]
+inherit = "default"
+fork_url = "${sepolia}"      # 使用上面定义的 sepolia 别名
+chain_id = 11155111
+gas_price = "auto"           # 自动获取当前 gas 价格
