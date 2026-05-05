@@ -9,6 +9,8 @@ optimizer = true
 optimizer_runs = 200
 auto_detect_remappings = true
 libs = ["dependencies"]
+# vm.readFile(KEYSTORE_PATH) 需要读权限；KEYSTORE_PATH 在仓库外时请追加一行 { access = "read", path = "/你的目录" }
+fs_permissions = [{ access = "read", path = "./" }]
 remappings = [
     "@openzeppelin-contracts-5.6.0/=dependencies/@openzeppelin-contracts-5.6.0/",
     "@uniswap-universal-router-1.6.0/=dependencies/@uniswap-universal-router-1.6.0/",
