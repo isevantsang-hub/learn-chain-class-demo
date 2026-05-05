@@ -67,7 +67,7 @@ contract Token10000WithCallbacksTest is Test {
         address alice = address(0xA11CE);
         uint256 amount = 20 * 10 ** 18;
 
-        token.transfer(alice, amount);
+        assertTrue(token.transfer(alice, amount));
         vm.prank(alice);
         token.approve(holder, amount);
 

@@ -60,7 +60,7 @@ contract CallbackReceiverDemoTest is Test {
         address alice = address(0xA11CE);
         uint256 amount = 100 * 10 ** 18;
 
-        token.transfer(alice, amount);
+        assertTrue(token.transfer(alice, amount));
         vm.startPrank(alice);
         token.approve(address(receiver), amount);
         vm.stopPrank();
