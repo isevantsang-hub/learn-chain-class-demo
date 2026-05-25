@@ -1,0 +1,3 @@
+[submodule "class-10/erc721-learn/lib/openzeppelin-contracts"]
+	path = class-10/erc721-learn/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
