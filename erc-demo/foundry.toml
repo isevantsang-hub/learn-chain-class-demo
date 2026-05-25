@@ -1,0 +1,26 @@
+[profile.default]
+src = "."
+test = "test"
+out = "out"
+cache_path = "cache"
+skip = ["dependencies/**", "erc20/test/**", "erc721/test/**", "erc2612/test/**", "erc777/test/**", "erc1155/test/**", "integration/test/**"]
+solc = "0.8.24"
+optimizer = true
+optimizer_runs = 200
+auto_detect_remappings = true
+libs = ["dependencies"]
+fs_permissions = [{ access = "read", path = "./" }]
+remappings = [
+    "@openzeppelin-contracts-5.6.0/=dependencies/@openzeppelin-contracts-5.6.0/",
+    "forge-std/=dependencies/forge-std-1.16.0/src/",
+]
+
+[soldeer]
+install_dir = "dependencies"
+remappings_generate = true
+remappings_prefix = ""
+recursive_deps = false
+
+[dependencies]
+"@openzeppelin-contracts" = { version = "5.6.0" }
+forge-std = "1.16.0"

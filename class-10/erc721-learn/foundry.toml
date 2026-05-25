@@ -1,0 +1,35 @@
+# ==================== 基础配置 ====================
+[profile.default]
+src = "src"
+test = "test"
+script = "script"
+out = "out"
+solc = "0.8.24"
+optimizer = true
+optimizer_runs = 200
+auto_detect_remappings = true
+libs = ["dependencies"]
+fs_permissions = [{ access = "read", path = "./" }]
+remappings = [
+    "@openzeppelin-contracts-5.6.0/=dependencies/@openzeppelin-contracts-5.6.0/",
+    "forge-std/=dependencies/forge-std-1.16.0/src/",
+]
+
+[soldeer]
+install_dir = "dependencies"
+remappings_generate = true
+remappings_location = "config"
+remappings_prefix = ""
+recursive_deps = false
+
+[dependencies]
+"@openzeppelin-contracts" = { version = "5.6.0" }
+forge-std = "1.16.0"
+
+# ==================== RPC / Etherscan ====================
+[rpc_endpoints]
+local = "http://127.0.0.1:8545"
+sepolia = "${SEPOLIA_RPC_URL}"
+
+[etherscan]
+sepolia = { key = "${SEPOLIA_ETHERSCAN_API_KEY}" }

@@ -4,9 +4,16 @@ pragma solidity ^0.8.20;
 import {Test} from "forge-std/Test.sol";
 import {Token10000WithCallbacks} from "../src/Token10000WithCallbacks.sol";
 import {CallbackReceiverDemo} from "../src/CallbackReceiverDemo.sol";
+import {console2} from "forge-std/Script.sol";
+import {console} from "forge-std/Script.sol";
 
 contract Token10000WithCallbacksTest is Test {
-    event TransferCallback(address indexed operator, address indexed from, uint256 value, bytes data);
+    event TransferCallback(
+        address indexed operator,
+        address indexed from,
+        uint256 value,
+        bytes data
+    );
     event ApprovalCallback(address indexed owner, uint256 value, bytes data);
 
     Token10000WithCallbacks internal token;
@@ -77,5 +84,45 @@ contract Token10000WithCallbacksTest is Test {
 
         assertEq(token.balanceOf(address(recv)), amount);
         assertEq(token.balanceOf(alice), 0);
+    }
+
+    function testFuzz_ERC20_Transfer(address to, uint256 amount) public {
+        vm.assume(to != address(0));
+        vm.assume(to != address(this));
+        amount = bound(amount, 0, 10000 * 10 ** 18);
+
+        console2.log(unicode" testFuzz_ERC20_Transfer address to: ", to);
+        console2.log(unicode" testFuzz_ERC20_Transfer uint256 amount: ", amount);
+
+        token.transfer(to, amount);
+        assertEq(token.balanceOf(to), amount);
+    }
+
+    function invariant_totalSupplyMustRemainConstant() public view{
+        console.log(unicode" invariant_totalSupplyMustRemainConstant totalSupply: % ,  token.INITIAL_SUPPLY() %", token.totalSupply() , token.INITIAL_SUPPLY());
+        assertEq(token.totalSupply(), token.INITIAL_SUPPLY());
+    }
+
+    function testFuzz_transferFromAndCall(address alice, uint256 amount) public {
+        vm.assume(alice != address(0));
+        vm.assume(alice != address(this));
+        vm.assume(alice != address(token));
+
+        console.log(unicode" testFuzz_transferFromAndCall address alice: ", alice);
+        console.log(unicode" testFuzz_transferFromAndCall uint256 amount: ", amount);
+
+
+        amount = bound(amount, 0, token.INITIAL_SUPPLY());
+
+        assertTrue(token.transfer(alice, amount));
+        vm.prank(alice);
+        token.approve(holder, amount);
+
+        CallbackReceiverDemo recv = new CallbackReceiverDemo();
+        token.transferFromAndCall(alice, address(recv), amount, hex"03");
+
+        assertEq(token.balanceOf(address(recv)), amount);
+        assertEq(token.balanceOf(alice), 0);
+        assertEq(token.totalSupply(), token.INITIAL_SUPPLY());
     }
 }
